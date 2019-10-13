@@ -1,0 +1,1 @@
+python keras_retinanet/bin/evaluate.py --coco data/coco --model snapshots/resnet50_coco_best_v2.1.0.h5

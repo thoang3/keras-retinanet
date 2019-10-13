@@ -77,7 +77,8 @@ def parse_args(args):
     """ Parse the arguments.
     """
     parser     = argparse.ArgumentParser(description='Evaluation script for a RetinaNet network.')
-    subparsers = parser.add_subparsers(help='Arguments for specific dataset types.', dest='dataset_type')
+    #subparsers = parser.add_subparsers(help='Arguments for specific dataset types.', dest='dataset_type')
+    '''
     subparsers.required = True
 
     coco_parser = subparsers.add_parser('coco')
@@ -89,11 +90,14 @@ def parse_args(args):
     csv_parser = subparsers.add_parser('csv')
     csv_parser.add_argument('annotations', help='Path to CSV file containing annotations for evaluation.')
     csv_parser.add_argument('classes', help='Path to a CSV file containing class label mapping.')
+	'''
+    parser.add_argument('--dataset_type', help='coco or pascal', default='coco')
+    parser.add_argument('--coco_path', help='Path to dataset directory')
 
-    parser.add_argument('model',              help='Path to RetinaNet model.')
+    parser.add_argument('--model',            help='Path to RetinaNet model.')
     parser.add_argument('--convert-model',    help='Convert the model to an inference model (ie. the input is a training model).', action='store_true')
     parser.add_argument('--backbone',         help='The backbone of the model.', default='resnet50')
-    parser.add_argument('--gpu',              help='Id of the GPU to use (as reported by nvidia-smi).')
+    parser.add_argument('--gpu',              help='Id of the GPU to use (as reported by nvidia-smi).', default=0)
     parser.add_argument('--score-threshold',  help='Threshold on score to filter detections with (defaults to 0.05).', default=0.05, type=float)
     parser.add_argument('--iou-threshold',    help='IoU Threshold to count for a positive detection (defaults to 0.5).', default=0.5, type=float)
     parser.add_argument('--max-detections',   help='Max Detections per image (defaults to 100).', default=100, type=int)
@@ -126,6 +130,7 @@ def main(args=None):
     if args.config:
         args.config = read_config_file(args.config)
 
+    print(args)
     # create the generator
     generator = create_generator(args)
 
