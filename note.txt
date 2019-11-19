@@ -1,3 +1,7 @@
+apt-get update
+apt-get upgrade
+apt-get install -y libsm6 libxext6 libxrender-dev
+
 # 10-13-2019
 
 - Trained to 50 epochs, resnet50_coco_50.h5, => mAP = 0.29, mAP@50 = 0.44
